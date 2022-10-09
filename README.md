@@ -1,3 +1,3 @@
-# excel-to-mysql-to-excel
+# Excel-to-MySQL-to-excel
 
 work in progress
