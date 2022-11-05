@@ -125,7 +125,7 @@ if (isset($_POST['post_comment']))
 
                             <div class="reply-inner-container_<?= $row['id'] ?> reply-container">
                                 <div>
-                                    <p>adadad</p>
+                                    <p class="reply-text_<?= $row['id'] ?>"></p>
                                 </div>
                             </div>
 
@@ -134,9 +134,9 @@ if (isset($_POST['post_comment']))
                                 <div class="reply_<?= $row['id'] ?> reply-style">
 
                                    <div class="reply-inner-style">
-                                        <textarea class="reply-textarea"></textarea>
+                                        <textarea class="reply-textarea_<?= $row['id'] ?> reply-textarea_style"></textarea>
 
-                                        <button class="reply-button">post reply</button>
+                                        <button class="reply-button" reply-id="<?php echo $row['id'] ?>">post reply</button>
                                    </div>
 
                                 </div>
