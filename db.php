@@ -15,7 +15,8 @@ if (!$conn)
 $sql = "CREATE TABLE IF NOT EXISTS comment_table (
         id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
         name varchar(255) NOT NULL,
-        comment text NOT NULL
+        comment text NOT NULL,
+        reply text DEFAULT NULL
 )";
 
 if(mysqli_query($conn, $sql)){

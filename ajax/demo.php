@@ -38,4 +38,6 @@ if(isset($_POST["ajaxReturn"]))
         return false;
     });
 
+    // show reply div if tex length > 0
+
 </script>

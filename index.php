@@ -45,6 +45,26 @@ if (isset($_POST['post_comment']))
     }
 }
 
+if (isset($_POST['reply-button']))
+{
+    // neseivojas sql reply column value
+    // laikam japasaka sql ka ielikt specifiski tada :
+    //  id   --   echo $row['id']
+    // ka spiestais reply id
+    // bet ka
+
+    $reply = $_POST['reply'];
+
+    $sql = "INSERT INTO your_table_name (reply)
+    VALUES ('$reply')";
+
+    if (!$conn->query($sql))
+    {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+}
+
 ?>
 
 <html>
@@ -120,7 +140,7 @@ if (isset($_POST['post_comment']))
                             </div>
 
 
-                            <button type="submit" class="reply" id="reply" name="reply" comment-id="<?php echo $row['id'] ?>">REPLY</button>
+                            <button type="submit" class="reply" id="reply" comment-id="<?php echo $row['id'] ?>">REPLY</button>
 
 
                             <div class="reply-inner-container_<?= $row['id'] ?> reply-container">
@@ -130,13 +150,13 @@ if (isset($_POST['post_comment']))
                             </div>
 
 
-                            <form method="post" class="post-style">
+                            <form action="" method="post" class="post-style">
                                 <div class="reply_<?= $row['id'] ?> reply-style">
 
                                    <div class="reply-inner-style">
-                                        <textarea class="reply-textarea_<?= $row['id'] ?> reply-textarea_style"></textarea>
+                                        <textarea class="reply-textarea_<?= $row['id'] ?> reply-textarea_style" name="reply"></textarea>
 
-                                        <button class="reply-button" reply-id="<?php echo $row['id'] ?>">post reply</button>
+                                        <button class="reply-button" reply-id="<?php echo $row['id'] ?>" name="reply-button">post reply</button>
                                    </div>
 
                                 </div>
