@@ -1,18 +1,5 @@
 <?php
-if(isset($_POST["ajaxReturn"]))
-{
-    echo "The post you posted is: " .$_POST["ajaxReturn"];
 
-    ?>
-    <script>
-        console.log("it works!");
-    </script>
-
-
-
-    <?php
-
-}
 ?>
 
 <script type="text/javascript">
@@ -29,13 +16,13 @@ if(isset($_POST["ajaxReturn"]))
     {
         let reply_id = $(this).attr('reply-id');
 
-        $(".reply-inner-container_" + reply_id).show();
+
         $(".reply_" + reply_id).hide();
 
-        let text = $('textarea.reply-textarea_'+ reply_id).val();
-        $('.reply-text_'+ reply_id).text(text);
 
-        return false;
+
+
+       //return false;
     });
 
     // show reply div if tex length > 0

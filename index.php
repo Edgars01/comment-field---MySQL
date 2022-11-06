@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include 'db.php';
 
 ?>
@@ -27,9 +27,9 @@ function checkIfInputIsEmpty()
     return $error;
 }
 
+
 if (isset($_POST['post_comment']))
 {
-
     if (!checkIfInputIsEmpty())
     {
         $name = $_POST['name'];
@@ -45,25 +45,29 @@ if (isset($_POST['post_comment']))
     }
 }
 
+
 if (isset($_POST['reply-button']))
 {
-    // neseivojas sql reply column value
-    // laikam japasaka sql ka ielikt specifiski tada :
-    //  id   --   echo $row['id']
-    // ka spiestais reply id
-    // bet ka
-
-    $reply = $_POST['reply'];
-
-    $sql = "INSERT INTO your_table_name (reply)
-    VALUES ('$reply')";
-
-    if (!$conn->query($sql))
+    echo "yes1";
+    if (isset($_POST['reply']))
     {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
+        echo "yes2";
 
+        $reply = $_POST['reply'];
+
+        $sql = "UPDATE comment_table
+        SET reply = '$reply'
+        WHERE id = 2";
+
+
+
+        if (!$conn->query($sql))
+        {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+    }
 }
+
 
 ?>
 
@@ -139,28 +143,26 @@ if (isset($_POST['reply-button']))
                                 <i class="fa-solid fa-thumbs-down"></i>
                             </div>
 
-
                             <button type="submit" class="reply" id="reply" comment-id="<?php echo $row['id'] ?>">REPLY</button>
 
-
-                            <div class="reply-inner-container_<?= $row['id'] ?> reply-container">
-                                <div>
-                                    <p class="reply-text_<?= $row['id'] ?>"></p>
-                                </div>
-                            </div>
-
+                            <?php echo $row['reply']; ?>
 
                             <form action="" method="post" class="post-style">
+
                                 <div class="reply_<?= $row['id'] ?> reply-style">
 
                                    <div class="reply-inner-style">
-                                        <textarea class="reply-textarea_<?= $row['id'] ?> reply-textarea_style" name="reply"></textarea>
 
-                                        <button class="reply-button" reply-id="<?php echo $row['id'] ?>" name="reply-button">post reply</button>
+                                        <textarea name="reply" class="reply-textarea_<?= $row['id'] ?> reply-textarea_style"></textarea>
+
+                                        <button type="submit" class="reply-button" name="reply-button" reply-id="<?php echo $row['id'] ?>">Post reply</button>
+
                                    </div>
 
                                 </div>
+
                             </form>
+
 
                         </div>
                         
