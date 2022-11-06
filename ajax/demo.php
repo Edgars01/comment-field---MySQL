@@ -15,19 +15,10 @@
     $(".reply-button").on("click", function (event)
     {
         let reply_id = $(this).attr('reply-id');
-
-
         $(".reply_" + reply_id).hide();
 
         createCookie("reply-id", reply_id, "10");
-
-
-       //return false;
     });
-
-
-
-
 
     function createCookie(name, value, days) {
         var expires;
@@ -41,11 +32,5 @@
         }
         document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/";
     }
-
-
-
-
-
-    // show reply div if tex length > 0
 
 </script>

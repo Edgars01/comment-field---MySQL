@@ -10,7 +10,6 @@ include 'db.php';
 </script>
 <?php
 
-
 function checkIfInputIsEmpty()
 {
     $required = array('name', 'comment');
@@ -26,7 +25,6 @@ function checkIfInputIsEmpty()
 
     return $error;
 }
-
 
 if (isset($_POST['post_comment']))
 {
@@ -44,28 +42,6 @@ if (isset($_POST['post_comment']))
         }
     }
 }
-
-
-//if (isset($_POST['reply-button']))
-//{
-//    if (isset($_POST['reply']))
-//    {
-//        $reply = $_POST['reply'];
-//
-//        $sql = "UPDATE comment_table
-//        SET reply = '$reply'
-//        WHERE id = 2";
-//
-//        if (!$conn->query($sql))
-//        {
-//            echo "Error: " . $sql . "<br>" . $conn->error;
-//        }
-//    }
-//}
-
-
-
-
 
 ?>
 
@@ -162,14 +138,11 @@ if (isset($_POST['post_comment']))
 
                                 </form>
 
-
                             </div>
 
                         </div>
 
                     <?php
-
-
 
                     if (isset($_POST['reply-button']))
                     {
@@ -191,7 +164,6 @@ if (isset($_POST['post_comment']))
                                     echo "Error: " . $sql . "<br>" . $conn->error;
                                 }
                             }
-
                         }
                     }
                 }
@@ -207,5 +179,3 @@ if (isset($_POST['post_comment']))
     </body>
 
 </html>
-
-
