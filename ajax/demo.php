@@ -19,11 +19,32 @@
 
         $(".reply_" + reply_id).hide();
 
-
+        createCookie("reply-id", reply_id, "10");
 
 
        //return false;
     });
+
+
+
+
+
+    function createCookie(name, value, days) {
+        var expires;
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toGMTString();
+        }
+        else {
+            expires = "";
+        }
+        document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/";
+    }
+
+
+
+
 
     // show reply div if tex length > 0
 

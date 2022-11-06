@@ -46,27 +46,25 @@ if (isset($_POST['post_comment']))
 }
 
 
-if (isset($_POST['reply-button']))
-{
-    echo "yes1";
-    if (isset($_POST['reply']))
-    {
-        echo "yes2";
+//if (isset($_POST['reply-button']))
+//{
+//    if (isset($_POST['reply']))
+//    {
+//        $reply = $_POST['reply'];
+//
+//        $sql = "UPDATE comment_table
+//        SET reply = '$reply'
+//        WHERE id = 2";
+//
+//        if (!$conn->query($sql))
+//        {
+//            echo "Error: " . $sql . "<br>" . $conn->error;
+//        }
+//    }
+//}
 
-        $reply = $_POST['reply'];
-
-        $sql = "UPDATE comment_table
-        SET reply = '$reply'
-        WHERE id = 2";
 
 
-
-        if (!$conn->query($sql))
-        {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-    }
-}
 
 
 ?>
@@ -122,53 +120,84 @@ if (isset($_POST['reply-button']))
             if ($result->num_rows > 0)
             {
                 // output data of each row
-                while($row = $result->fetch_assoc()) {
-                ?>
+                while($row = $result->fetch_assoc())
+                {
+                    ?>
 
-                    <div class="comment-main-container">
-                        
-                        <div class="information-container">
-                            <img class="profile-image" src="img_avatar.png">
-                            
-                            <div class="comment-container">
-                                <h3 class="comment-name"><?php echo $row['name']; ?></h3>
-                                <p class="comment-content"><?php echo $row['comment']; ?></p>
-                            </div>
-                        </div>
+                        <div class="comment-main-container">
 
-                        <div class="options-container">
+                            <div class="information-container">
+                                <img class="profile-image" src="img_avatar.png">
 
-                            <div class="options-inner-container">
-                                <i class="fa-solid fa-thumbs-up"></i>
-                                <i class="fa-solid fa-thumbs-down"></i>
+                                <div class="comment-container">
+                                    <h3 class="comment-name"><?php echo $row['name']; ?></h3>
+                                    <p class="comment-content"><?php echo $row['comment']; ?></p>
+                                </div>
                             </div>
 
-                            <button type="submit" class="reply" id="reply" comment-id="<?php echo $row['id'] ?>">REPLY</button>
+                            <div class="options-container">
 
-                            <?php echo $row['reply']; ?>
-
-                            <form action="" method="post" class="post-style">
-
-                                <div class="reply_<?= $row['id'] ?> reply-style">
-
-                                   <div class="reply-inner-style">
-
-                                        <textarea name="reply" class="reply-textarea_<?= $row['id'] ?> reply-textarea_style"></textarea>
-
-                                        <button type="submit" class="reply-button" name="reply-button" reply-id="<?php echo $row['id'] ?>">Post reply</button>
-
-                                   </div>
-
+                                <div class="options-inner-container">
+                                    <i class="fa-solid fa-thumbs-up"></i>
+                                    <i class="fa-solid fa-thumbs-down"></i>
                                 </div>
 
-                            </form>
+                                <button type="submit" class="reply" id="reply" comment-id="<?php echo $row['id'] ?>">REPLY</button>
 
+                                <?php echo $row['reply']; ?>
+
+                                <form action="" method="post" class="post-style">
+
+                                    <div class="reply_<?= $row['id'] ?> reply-style">
+
+                                       <div class="reply-inner-style">
+
+                                            <textarea name="reply" class="reply-textarea_<?= $row['id'] ?> reply-textarea_style"></textarea>
+
+                                            <button type="submit" class="reply-button" name="reply-button" reply-id="<?php echo $row['id'] ?>">Post reply</button>
+
+                                       </div>
+
+                                    </div>
+
+                                </form>
+
+
+                            </div>
 
                         </div>
-                        
-                    </div>
 
-                <?php } } ?>
+                    <?php
+
+
+
+                    if (isset($_POST['reply-button']))
+                    {
+                        if (isset($_POST['reply']))
+                        {
+
+                            if (isset($_COOKIE["reply-id"]))
+                            {
+                                $reply_id = $_COOKIE["reply-id"];
+
+                                $reply = $_POST['reply'];
+
+                                $sql = "UPDATE comment_table
+                                SET reply = '$reply'
+                                WHERE id = $reply_id";
+
+                                if (!$conn->query($sql))
+                                {
+                                    echo "Error: " . $sql . "<br>" . $conn->error;
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+
+            ?>
 
             <?php
                 include 'ajax/demo.php';
